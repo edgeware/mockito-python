@@ -268,6 +268,17 @@ class StubbingTest(TestBase):
     else:
       self.assertTrue(False, "StubbingError not raised")
 
+  def testChainableStubs(self):
+    person = mock(chainable=True)
+    person.needs().help(10)
+    verify(person).needs().help(10)
+
+    that = mock(chainable=True)
+    when(that).a().b(10).thenReturn(20)
+    x = that.a().b(10)
+    self.assertEquals(x, 20)
+
+
 # TODO: verify after stubbing and vice versa
 
 if __name__ == '__main__':

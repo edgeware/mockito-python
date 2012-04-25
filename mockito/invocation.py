@@ -2,6 +2,8 @@
 # coding: utf-8
 
 import matchers
+from verification import Times
+
 
 __copyright__ = "Copyright 2008-2010, Mockito Contributors"
 __license__ = "MIT"
@@ -21,7 +23,9 @@ class Invocation(object):
     self.named_params = {}
     self.answers = []
     self.strict = mock.strict
-    
+    from mockito import mock
+    self.chain = mock(chainable=True)
+
   def _remember_params(self, params, named_params):
     self.params = params
     self.named_params = named_params
@@ -64,13 +68,13 @@ class RememberedInvocation(Invocation):
   def __call__(self, *params, **named_params):
     self._remember_params(params, named_params)
     self.mock.remember(self)
-    
+
     for matching_invocation in self.mock.stubbed_invocations:
       if matching_invocation.matches(self):
         return matching_invocation.answer_first()
 
-    return None
-  
+    return self.chain if self.mock.chainable else None
+
 class RememberedProxyInvocation(Invocation):
   '''Remeber params and proxy to method of original object.
   
@@ -99,13 +103,17 @@ class VerifiableInvocation(MatchingInvocation):
     
     for invocation in matched_invocations:
       invocation.verified = True
+    if self.mock.chainable:
+        invocation.chain.verification = Times(1)
+        return invocation.chain
+
   
 class StubbedInvocation(MatchingInvocation):
   def __init__(self, *params):
     super(StubbedInvocation, self).__init__(*params)  
     if self.mock.strict:
       self.ensure_mocked_object_has_method(self.method_name)
-        
+
   def ensure_mocked_object_has_method(self, method_name):  
     if not self.mock.has_method(method_name):
       raise InvocationError("You tried to stub a method '%s' the object (%s) doesn't have." 
@@ -120,7 +128,7 @@ class StubbedInvocation(MatchingInvocation):
     self.answers.append(answer)
     self.mock.stub(self.method_name)
     self.mock.finish_stubbing(self)
-    
+
 class AnswerSelector(object):
   def __init__(self, invocation):
     self.invocation = invocation
@@ -135,6 +143,12 @@ class AnswerSelector(object):
     for exception in exceptions:
       self.__then(Raise(exception))
     return self
+
+  def __getattr__(self, name):
+    return_value = self.invocation.chain
+    self.__then(Return(return_value))
+    return_value.expect_stubbing()
+    return getattr(return_value, name)
 
   def __then(self, answer):
     if not self.answer:

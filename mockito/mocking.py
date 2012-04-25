@@ -79,7 +79,7 @@ def fromMethod(meth):
 import inspect
 
 class mock(TestDouble):
-  def __init__(self, mocked_obj=None, strict=True):
+  def __init__(self, mocked_obj=None, strict=True, chainable=False):
     self.invocations = []
     self.stubbed_invocations = []
     self.original_methods = []
@@ -95,6 +95,7 @@ class mock(TestDouble):
       self.zi = isinstance(mocked_obj, zi.interface.InterfaceClass)
     else:
       self.zi = False
+    self.chainable = chainable
 
     mock_registry.register(self)
   
