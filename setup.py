@@ -21,6 +21,7 @@ setup(name='mockito-edgeware',
           'Intended Audience :: Developers',
           'License :: OSI Approved :: MIT License',
           'Topic :: Software Development :: Testing',
+          'Programming Language :: Python :: 2'
           'Programming Language :: Python :: 3'
       ],
       test_suite = 'nose.collector',
