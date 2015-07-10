@@ -39,6 +39,5 @@ class SpyingTest(TestBase):
     try:
       dummy.lol()
       self.fail("Should fail if no such method.")
-    except AttributeError, e:
+    except AttributeError as e:
       self.assertEquals("You tried to call method 'lol' which 'Dummy' instance does not have.", str(e))
-      

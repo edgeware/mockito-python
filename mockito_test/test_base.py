@@ -15,7 +15,7 @@ class TestBase(unittest.TestCase):
       else:
         callable()        
       self.fail('Exception with message "%s" expected, but never raised' % (message))
-    except Exception, e:
+    except Exception as e:
       # TODO: self.fail() raises AssertionError which is caught here and error message becomes hardly understadable 
       self.assertEquals(message, str(e))    
 
