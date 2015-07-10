@@ -1,4 +1,4 @@
-from test_base import *
+from mockito_test.test_base import *
 from mockito import * 
 from mockito.invocation import InvocationError
 import os

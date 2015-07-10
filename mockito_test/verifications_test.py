@@ -1,7 +1,7 @@
 #!/usr/bin/env python
 # coding: utf-8
 
-from test_base import TestBase, main
+from mockito_test.test_base import TestBase, main
 from mockito import mock, verify, inorder, VerificationError , ArgumentError, verifyNoMoreInteractions, verifyZeroInteractions, any
 from mockito.verification import never
       

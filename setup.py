@@ -1,14 +1,6 @@
-#!/usr/bin/env python
-# coding: utf-8
-
-from distribute_setup import use_setuptools
-use_setuptools()
-
-try:
-  from setuptools import setup
-except ImportError:
-  from distutils.core import setup
 import sys
+
+from setuptools import setup
 
 extra = {}
 if sys.version_info >= (3,):
@@ -35,4 +27,3 @@ setup(name='mockito',
       setup_requires = ['nose'],
       **extra
 )
-
