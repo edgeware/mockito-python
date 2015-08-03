@@ -7,7 +7,7 @@ if sys.version_info >= (3,):
     extra['use_2to3'] = True
 
 setup(name='mockito',
-      version='0.5.1-edgeware',
+      version='0.5.1+edgeware',
       packages=['mockito', 'mockito_test', 'mockito_util'],
       url='https://github.com/edgeware/mockito-python',
       download_url='http://pypi.edgeware.tv/simple/mockito',
