@@ -4,18 +4,19 @@ from setuptools import setup
 
 extra = {}
 if sys.version_info >= (3,):
-  extra['use_2to3'] = True
+    extra['use_2to3'] = True
 
-setup(name='mockito-edgeware',
-      version='1.0.0',
+setup(name='mockito',
+      version='0.5.1-edgeware',
       packages=['mockito', 'mockito_test', 'mockito_util'],
       url='https://github.com/edgeware/mockito-python',
-      download_url='http://pypi.edgeware.tv/simple/mockito-edgeware',
+      download_url='http://pypi.edgeware.tv/simple/mockito',
       maintainer='Mockito Maintainers',
       maintainer_email='mockito-python@googlegroups.com',
       license='MIT',
       description='Spying framework',
-      long_description='Mockito is a spying framework based on Java library with the same name.',
+      long_description=('Mockito is a spying framework based on Java library'
+                        'with the same name.'),
       classifiers=[
           'Development Status :: 4 - Beta',
           'Intended Audience :: Developers',
@@ -24,8 +25,7 @@ setup(name='mockito-edgeware',
           'Programming Language :: Python :: 2'
           'Programming Language :: Python :: 3'
       ],
-      test_suite = 'nose.collector',
-      py_modules = ['distribute_setup'],
-      setup_requires = ['nose'],
-      **extra
-)
+      test_suite='nose.collector',
+      py_modules=['distribute_setup'],
+      setup_requires=['nose'],
+      **extra)
