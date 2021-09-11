@@ -1,3 +1,5 @@
+from __future__ import print_function
+
 import os
 import re
 
@@ -17,6 +19,6 @@ readme_after = re.compile(token + '.*', re.S).sub(token + '\n' + demo_test, read
 if (readme_before != readme_after):  
   readme_file = openFile('README', 'w')
   readme_file.write(readme_after)
-  print "README updated"
+  print("README updated")
 else:
-  print "README update not required" 
+  print("README update not required") 

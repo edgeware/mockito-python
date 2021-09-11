@@ -23,27 +23,27 @@ class InstanceMethodsTest(TestBase):
         unstub()
 
         rex = Dog()
-        self.assertEquals('Wuff!', rex.waggle())
-        self.assertEquals(original_method, Dog.waggle)
+        self.assertEqual('Wuff!', rex.waggle())
+        self.assertEqual(original_method, Dog.waggle)
         
     def testStubAnInstanceMethod(self):
         when(Dog).waggle().thenReturn('Boing!')
 
         rex = Dog()
-        self.assertEquals('Boing!', rex.waggle())
+        self.assertEqual('Boing!', rex.waggle())
         
     def testStubsAnInstanceMethodWithAnArgument(self):
         when(Dog).bark('Miau').thenReturn('Wuff')
         
         rex = Dog()
-        self.assertEquals('Wuff', rex.bark('Miau'))
+        self.assertEqual('Wuff', rex.bark('Miau'))
         #self.assertEquals('Wuff', rex.bark('Wuff'))
         
     def testInvocateAStubbedMethodFromAnotherMethod(self):
         when(Dog).bark('Wau').thenReturn('Wuff')
         
         rex = Dog()
-        self.assertEquals('Wuff', rex.do_default_bark())
+        self.assertEqual('Wuff', rex.do_default_bark())
         verify(Dog).bark('Wau')
         
     def testYouCantStubAnUnknownMethodInStrictMode(self):
@@ -56,18 +56,18 @@ class InstanceMethodsTest(TestBase):
     def testCallingAStubbedMethodWithUnexpectedArgumentsShouldReturnNone(self):
         when(Dog).bark('Miau').thenReturn('Wuff')        
         rex = Dog()
-        self.assertEquals(None, rex.bark('Shhh'))
+        self.assertEqual(None, rex.bark('Shhh'))
         
         
     def testStubInstancesInsteadOfClasses(self):
         rex = Dog()
         when(rex).bark('Miau').thenReturn('Wuff')
         
-        self.assertEquals('Wuff', rex.bark('Miau'))
+        self.assertEqual('Wuff', rex.bark('Miau'))
         verify(rex, times=1).bark(any())
 
         max = Dog()
-        self.assertEquals('Miau!', max.bark('Miau'))
+        self.assertEqual('Miau!', max.bark('Miau'))
         
         
 if __name__ == '__main__':

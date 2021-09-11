@@ -22,7 +22,7 @@ class MockingExactTypesTest(TestBase):
     
   def testShouldReturnNoneWhenCallingExistingButUnstubbedMethod(self):
     ourMock = mock(Foo)
-    self.assertEquals(None, ourMock.bar())
+    self.assertEqual(None, ourMock.bar())
     
 if __name__ == '__main__':
   unittest.main()
