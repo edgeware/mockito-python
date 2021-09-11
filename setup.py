@@ -1,7 +1,7 @@
 from setuptools import setup
 
 setup(name='mockito-edgeware',
-      version='0.5.1',
+      version='0.5.2',
       packages=['mockito', 'mockito_test', 'mockito_util'],
       url='https://github.com/edgeware/mockito-python',
       download_url='http://pypi.edgeware.tv/simple/mockito',
