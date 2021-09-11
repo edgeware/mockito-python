@@ -1,9 +1,11 @@
 #!/usr/bin/env python
 # coding: utf-8
 
+from __future__ import absolute_import
+
 import inspect
-import invocation
-from mock_registry import mock_registry
+from mockito import invocation
+from mockito.mock_registry import mock_registry
 from types import FunctionType, MethodType
 import warnings
 
@@ -34,8 +36,8 @@ def fromFunction(func, imlevel=0):
   # Copyright (c) 2001, 2002 Zope Foundation and Contributors.
   # All Rights Reserved.
   signature = {}
-  defaults = func.func_defaults or ()
-  code = func.func_code
+  defaults = func.__defaults__ or ()
+  code = func.__code__
   # Number of positional arguments
   na = code.co_argcount-imlevel
   names = code.co_varnames[imlevel:]
@@ -73,7 +75,7 @@ def fromFunction(func, imlevel=0):
 def fromMethod(meth):
   # Copyright (c) 2001, 2002 Zope Foundation and Contributors.
   # All Rights Reserved.
-  func = meth.im_func
+  func = meth.__func__
   return fromFunction(func, imlevel=1)
 
 import inspect

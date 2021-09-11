@@ -9,28 +9,28 @@ class VerificationErrorsTest(TestBase):
     try:
       verify(theMock).foo()
     except VerificationError as e:
-      self.assertEquals("\nWanted but not invoked: foo()", str(e))
+      self.assertEqual("\nWanted but not invoked: foo()", str(e))
       
   def testPrintsNicelyOneArgument(self):
     theMock = mock()
     try:
       verify(theMock).foo("bar")
     except VerificationError as e:
-      self.assertEquals("\nWanted but not invoked: foo('bar')", str(e))
+      self.assertEqual("\nWanted but not invoked: foo('bar')", str(e))
 
   def testPrintsNicelyArguments(self):
     theMock = mock()
     try:
       verify(theMock).foo(1, 2)
     except VerificationError as e:
-      self.assertEquals("\nWanted but not invoked: foo(1, 2)", str(e))
+      self.assertEqual("\nWanted but not invoked: foo(1, 2)", str(e))
     
   def testPrintsNicelyStringArguments(self):
     theMock = mock()
     try:
       verify(theMock).foo(1, 'foo')
     except VerificationError as e:
-      self.assertEquals("\nWanted but not invoked: foo(1, 'foo')", str(e))
+      self.assertEqual("\nWanted but not invoked: foo(1, 'foo')", str(e))
       
   def testPrintsOutThatTheActualAndExpectedInvocationCountDiffers(self):
       theMock = mock()
@@ -42,7 +42,7 @@ class VerificationErrorsTest(TestBase):
       try:
           verify(theMock).foo()
       except VerificationError as e:
-          self.assertEquals("\nWanted times: 1, actual times: 2", str(e))
+          self.assertEqual("\nWanted times: 1, actual times: 2", str(e))
           
 
   # TODO: implement
@@ -52,7 +52,7 @@ class VerificationErrorsTest(TestBase):
     try:
       verify(theMock).foo(1, 'foo')
     except VerificationError as e:
-      self.assertEquals(
+      self.assertEqual(
 """Arguments are different.
 Wanted: foo(1, 'foo')
 Actual: foo('foo', 1)""", str(e))
@@ -63,7 +63,7 @@ Actual: foo('foo', 1)""", str(e))
     try:
       verifyNoMoreInteractions(theMock)
     except VerificationError as e:
-      self.assertEquals("\nUnwanted interaction: foo(1, 'foo')", str(e))
+      self.assertEqual("\nUnwanted interaction: foo(1, 'foo')", str(e))
       
   def testPrintsNeverWantedInteractionsNicely(self):
       theMock = mock()      

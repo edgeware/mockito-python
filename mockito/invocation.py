@@ -1,8 +1,12 @@
 #!/usr/bin/env python
 # coding: utf-8
 
-import matchers
-from verification import Times
+from __future__ import absolute_import
+
+from mockito import matchers
+from mockito.verification import Times
+
+import six
 
 
 __copyright__ = "Copyright 2008-2010, Mockito Contributors"
@@ -23,7 +27,7 @@ class Invocation(object):
     self.named_params = {}
     self.answers = []
     self.strict = mock.strict
-    from mockito import mock
+    from mockito.mockito import mock
     self.chain = mock(chainable=True)
 
   def _remember_params(self, params, named_params):
@@ -58,7 +62,7 @@ class MatchingInvocation(Invocation):
       if not self.compare(p1, invocation.params[x]):
           return False
       
-    for x, p1 in self.named_params.iteritems():
+    for x, p1 in six.iteritems(self.named_params):
       if not self.compare(p1, invocation.named_params[x]):
           return False
       

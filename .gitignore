@@ -1,0 +1,6 @@
+*.pyc
+
+.eggs/
+.tox/
+build/
+mockito_edgeware.egg-info/
